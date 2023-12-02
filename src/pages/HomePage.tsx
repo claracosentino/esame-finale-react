@@ -1,3 +1,4 @@
+import EventListCard from "../components/EventListCard"
 import { useEvents } from "../hooks/useEvents"
 
 const HomePage = () => {
@@ -10,10 +11,8 @@ const HomePage = () => {
     return (
         <>
             <h1>Lista di eventini</h1>
-            {events.map((evento, i) => {
-                return (
-                    <p key={i}>Il nome dell'evento è {evento.name}</p>
-                )
+            {events.map((singleEvent, i) => {
+                return <EventListCard singleEvent={singleEvent} detailPath={`/detail/${singleEvent.id}`} key={i}/>
             })}
         </>
     )
