@@ -1,0 +1,87 @@
+.hero {
+
+    .fluid-img {
+        background-image: url('../assets/img/hero-fluid-03.png');
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover;
+
+        opacity: 1; 
+        transition: opacity 200ms ease-in-out; 
+    }
+
+    .square {
+        border-image-slice: 1;
+        border-width: 7px;
+        border-image-source: linear-gradient(to right, #5A1CBE, #CE4BC6);
+
+        h1 {
+            font-size: 5vw;
+            text-align: center;
+        }
+
+        .payoff {
+            font-size: 1vw;
+        }
+    }
+}
+
+.description-home {
+    p {
+        font-size: 3rem;
+        text-align: center;
+    }
+}
+
+.event-card {
+    background-image: url('https://picsum.photos/417/417');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20px;
+
+    &__top-info {
+
+        padding: 20px;
+
+        .date, .price {
+            padding: 10px;
+            border-radius: 20px;
+            display: inline;
+        }
+
+        .date {
+            background-color: #CE4BC6;
+            color: #1d1d1b;
+        }
+
+        .price {
+            border: #CE4BC6 2px solid;
+            right: 0;
+        }
+    }
+
+    &__bottom-info {
+        margin: 20px;;
+        padding: 10px;
+        bottom: 0;
+        border-radius: 20px;
+        background-color: #CE4BC6;
+        color: #1d1d1b;
+
+        .name {
+            margin-bottom: 0.7rem;
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .tags, .hour {
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        .tags {
+            margin-left: 0.7rem;
+        }
+    }
+}
