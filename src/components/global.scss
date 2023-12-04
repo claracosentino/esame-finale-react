@@ -1,0 +1,41 @@
+/* Colori */
+$viola-chiaro: rgb(206, 75, 197);
+$viola-scuro: rgb(91, 29, 191);
+$nero: #1d1d1b;
+
+body {
+    background-color: #1d1d1b;
+    font-family: "Space Grotesk", sans-serif;
+    color: white;
+}
+
+h2 {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+
+    span {
+        color: $viola-chiaro;
+        font-style: italic;
+    }
+}
+
+button {
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10rem;
+
+    &.btn-solid {
+        background-color: $viola-chiaro;
+    }
+
+    &.btn-underline {
+        text-decoration: underline;
+        font-style: italic;
+        font-weight: 100;
+
+        i {
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+    }
+}

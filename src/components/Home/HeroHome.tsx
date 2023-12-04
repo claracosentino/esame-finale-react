@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import './home.scss'
 
 const HeroHome = () => {

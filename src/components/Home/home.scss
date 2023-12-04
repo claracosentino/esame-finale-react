@@ -1,7 +1,9 @@
+@import "../global";
+
 .hero {
 
     .fluid-img {
-        background-image: url('../assets/img/hero-fluid-03.png');
+        background-image: url('../../assets/img/hero-fluid-03.png');
         background-position: center; 
         background-repeat: no-repeat; 
         background-size: cover;
@@ -13,7 +15,7 @@
     .square {
         border-image-slice: 1;
         border-width: 7px;
-        border-image-source: linear-gradient(to right, #5A1CBE, #CE4BC6);
+        border-image-source: linear-gradient(to right, $viola-scuro, $viola-chiaro);
 
         h1 {
             font-size: 5vw;
@@ -34,10 +36,10 @@
 }
 
 .event-card {
-    background-image: url('https://picsum.photos/417/417');
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 20px;
+    
 
     &__top-info {
 
@@ -50,12 +52,12 @@
         }
 
         .date {
-            background-color: #CE4BC6;
-            color: #1d1d1b;
+            background-color: $viola-chiaro;
+            color: $nero;
         }
 
         .price {
-            border: #CE4BC6 2px solid;
+            border: $viola-chiaro 2px solid;
             right: 0;
         }
     }
@@ -65,8 +67,8 @@
         padding: 10px;
         bottom: 0;
         border-radius: 20px;
-        background-color: #CE4BC6;
-        color: #1d1d1b;
+        background-color: $viola-chiaro;
+        color: $nero;
 
         .name {
             margin-bottom: 0.7rem;
@@ -85,3 +87,4 @@
         }
     }
 }
+

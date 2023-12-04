@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom"
 import { EventListType } from "../repo/events.types"
+// import function to register Swiper custom elements
+import { register } from 'swiper/element/bundle';
+// register Swiper custom elements
+register();
+
 
 type EventListCardPropsType = {
     singleEvent: EventListType,
@@ -23,7 +28,7 @@ const EventListCard = ({singleEvent, detailPath}: EventListCardPropsType) => {
 
     return(
         <Link to={detailPath}>
-            <div className="event-card h-[417px] flex flex-col justify-between" style={{ backgroundImage: `url(${coverImage})`}}>
+            <div className="event-card h-[417px] flex flex-col justify-between" style={{ backgroundImage: `linear-gradient(rgba(206, 75, 197, 0.4), rgba(91, 29, 191, 0.5), rgba(0, 0, 0, 0.5)), url(${coverImage})`}}>
                 <div className="event-card__top-info flex justify-between">
                     <div className="date">🗓️ {dateFormatted}</div>
                     <div className="price"> da {price}€</div>

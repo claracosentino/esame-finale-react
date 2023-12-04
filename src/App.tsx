@@ -2,6 +2,7 @@ import './App.css'
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import DetailPage from './pages/DetailPage'
 import {Suspense, lazy} from 'react'
+import AllEvents from './pages/AllEvents'
 
 const HomePage = lazy(() => import ('./pages/HomePage'))
 
@@ -9,6 +10,10 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage/>
+  },
+  {
+    path: '/events',
+    element: <AllEvents/>
   },
   {
     path: '/detail/:id',
