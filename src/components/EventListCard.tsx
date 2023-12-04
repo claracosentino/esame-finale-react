@@ -23,7 +23,7 @@ const EventListCard = ({singleEvent, detailPath}: EventListCardPropsType) => {
 
     return(
         <Link to={detailPath}>
-            <div className="event-card w-[417px] h-[417px] flex flex-col justify-between" style={{ backgroundImage: "url(https://picsum.photos/200/300.webp)"}}>
+            <div className="event-card h-[417px] flex flex-col justify-between" style={{ backgroundImage: `url(${coverImage})`}}>
                 <div className="event-card__top-info flex justify-between">
                     <div className="date">🗓️ {dateFormatted}</div>
                     <div className="price"> da {price}€</div>

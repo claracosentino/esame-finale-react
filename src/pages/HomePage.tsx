@@ -14,10 +14,13 @@ const HomePage = () => {
         <>
             <HeroHome/>
             <DescriptionHome/>
-            <h1>Lista di eventini</h1>
-            {events.map((singleEvent, i) => {
-                return <EventListCard singleEvent={singleEvent} detailPath={`/detail/${singleEvent.id}`} key={i}/>
-            })}
+            <div className="container">
+                <div className="grid grid-cols-3 gap-4">
+                    {events.map((singleEvent, i) => {
+                        return <EventListCard singleEvent={singleEvent} detailPath={`/detail/${singleEvent.id}`} key={i}/>
+                    })}
+                </div>
+            </div>
         </>
     )
 }
