@@ -23,6 +23,7 @@ const CustomAccordionDetails = styled(AccordionDetails)(({ theme }) => ({
     backgroundColor: '#1d1d1b',
     '& .MuiTypography-root': {
         fontFamily: '"Space Grotesk", sans-serif',
+        fontSize: '1.05rem',
         fontWeight: 'light',
         color: 'white',
     },
