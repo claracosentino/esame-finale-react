@@ -91,7 +91,7 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                                     Email:
                                                     <input type="text" name="email" value={inputEmail} onChange={e => setInputEmail(e.target.value)}/>
                                                 </label>
-                                                <input type="submit" value="Submit" onClick={()=>writeDataReservation(1, inputName, inputCognome, inputEmail, name, "21:00")}/>
+                                                <input type="submit" value="Submit" onClick={()=>writeDataReservation(inputName, inputCognome, inputEmail, name, "21:00")}/>
                                             </form>
                                         </Box>
                                     </Modal>

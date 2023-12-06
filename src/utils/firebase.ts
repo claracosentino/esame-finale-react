@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set } from "firebase/database";
-import { collection, getDocs } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -19,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 
 const databaseFirebase = getDatabase(app);
 
-export function writeDataReservation(id: number, nome:string, cognome:string, email:string, nomeEvento:string, slotOrario:string) {
+export function writeDataReservation(nome:string, cognome:string, email:string, nomeEvento:string, slotOrario:string) {
   set(ref(databaseFirebase, "reservations/"), {
     nome,
     cognome,
