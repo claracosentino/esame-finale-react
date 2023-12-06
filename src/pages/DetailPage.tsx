@@ -1,3 +1,6 @@
+import DescriptionEvento from "../components/DettaglioEvento/DescriptionEvento"
+import HeroDettaglio from "../components/DettaglioEvento/HeroDettaglio"
+import Navbar from "../components/Navbar"
 import { useEventDetail } from "../hooks/useEventDetail"
 
 const DetailPage = () => {
@@ -6,9 +9,16 @@ const DetailPage = () => {
 
     return (
         <>
-            <p>
-                Pagina di dettaglio
-            </p>
+            <Navbar/>
+            {/* CAPIRE SE QUESTA COSA SIA GIUSTA */}
+            {eventDetail ? (
+                <>
+                    <HeroDettaglio eventDetail={eventDetail}/>
+                    <DescriptionEvento eventDetail={eventDetail}/>
+                </>
+            ) : (
+                <p>Loading...</p>
+            )}
         </>
     )
 }

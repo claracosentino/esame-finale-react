@@ -28,7 +28,6 @@ export const useEventDetail = () => {
     useEffect(()=>{
         getEventDetail(idNumber).then((eventDetail)=>{
             setEventDetail(eventDetail)
-            console.log(eventDetail)
             setIsLoading(false)
         })
     }, [idNumber])
