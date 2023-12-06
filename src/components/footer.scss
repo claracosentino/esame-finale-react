@@ -1,0 +1,14 @@
+@import "global";
+
+footer {
+    background-color: $viola-chiaro;
+
+    p {
+        font-size: 0.7rem;
+    }
+
+    a {
+        font-style: italic;
+        text-decoration: underline;
+    }
+}

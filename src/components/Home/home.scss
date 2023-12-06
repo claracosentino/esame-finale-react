@@ -1,0 +1,90 @@
+@import "../global";
+
+.hero {
+
+    .fluid-img {
+        background-image: url('../../assets/img/hero-fluid-03.png');
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover;
+
+        opacity: 1; 
+        transition: opacity 200ms ease-in-out; 
+    }
+
+    .square {
+        border-image-slice: 1;
+        border-width: 7px;
+        border-image-source: linear-gradient(to right, $viola-scuro, $viola-chiaro);
+
+        h1 {
+            font-size: 5vw;
+            text-align: center;
+        }
+
+        .payoff {
+            font-size: 1vw;
+        }
+    }
+}
+
+.description-home {
+    p {
+        font-size: 3rem;
+        text-align: center;
+    }
+}
+
+.event-card {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20px;
+    
+
+    &__top-info {
+
+        padding: 20px;
+
+        .date, .price {
+            padding: 10px;
+            border-radius: 20px;
+            display: inline;
+        }
+
+        .date {
+            background-color: $viola-chiaro;
+            color: $nero;
+        }
+
+        .price {
+            border: $viola-chiaro 2px solid;
+            right: 0;
+        }
+    }
+
+    &__bottom-info {
+        margin: 20px;;
+        padding: 10px;
+        bottom: 0;
+        border-radius: 20px;
+        background-color: $viola-chiaro;
+        color: $nero;
+
+        .name {
+            margin-bottom: 0.7rem;
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .tags, .hour {
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        .tags {
+            margin-left: 0.7rem;
+        }
+    }
+}
+
