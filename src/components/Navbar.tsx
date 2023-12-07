@@ -12,11 +12,11 @@ const pages = [
     },
     {
         title: 'events',
-        path: '/'
+        path: '/events'
     },
     {
         title: 'FAQ',
-        path: '/'
+        path: '/#faq'
     },
 ];
 

@@ -33,7 +33,7 @@ const Faq = () => {
 
     return(
         <>
-            <section className="faq-home mt-20">
+            <section className="faq-home mt-20" id='#faq'>
                 <div className="container">
                     <h2>Dubbi? <span>Faq!</span></h2>
                     <div className="grid grid-cols-6 gap-4">

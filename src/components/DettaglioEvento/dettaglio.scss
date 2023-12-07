@@ -21,8 +21,89 @@
 }
 
 .descrizione-evento {
-    img {
-        width: 100px;
-        height: 100px;
+
+    &__testo-grande {
+        font-weight: 500;
+        font-size: 1.5rem;
     }
+
+    &__testo-piccolo {
+        font-weight: 200;
+        font-size: 1rem;
+    }
+
+    &__box {
+
+        border-radius: 30px;
+        height: 200px;
+        text-align: center;
+        
+        &.price {
+            background-color: #91C7B1;
+        }
+        
+        &.dresscode {
+            background-color: #D8A47F;
+        }
+
+        &.included-drinks {
+            background-color: #6794b0;
+        }
+
+        &.noise {
+            background-image: url('../../assets/img/noise-effect.png');
+            opacity: 1;
+        }
+
+        .emoji {
+            font-size: 2.8rem;
+        }
+
+        .dataTitle {
+            font-weight: 100;
+        }
+
+        .data {
+            font-size: 1.3rem;
+        }
+
+    }
+}
+
+.certificate-aperitivo {
+    background-image: url('../../assets/img/certificate-aperitivo.png');
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+
+    width: 11vw;
+    aspect-ratio: 1/1;
+
+    text-align: center;
+    font-size: 3rem;
+
+    .drink, .incluso {
+        padding: 0;
+        margin: 0;
+    }
+
+    .drink {
+        font-weight: 100;
+        font-size: 1.5rem;
+        margin-bottom: -3rem;
+    }
+
+    .incluso {
+        font-weight: 900;
+        color: $viola-chiaro;
+    }
+
+}
+
+.prenotazione {
+
+    button {
+        margin-right: 2rem;
+    }
+
 }
