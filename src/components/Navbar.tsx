@@ -16,16 +16,12 @@ import { Link } from "react-router-dom";
 
 const pages = [
     {
-        title: "Home",
+        title: "HOME",
         path: "/",
     },
     {
-        title: "events",
+        title: "EVENTS",
         path: "/events",
-    },
-    {
-        title: "FAQ",
-        path: "/#faq",
     },
 ];
 
