@@ -39,7 +39,6 @@ const Faq = () => {
                 <div className="container">
                     <h2>
                         Dubbi? <span>Faq!</span>
-                        <Loading />
                     </h2>
                     <div className="grid grid-cols-6 gap-4">
                         <div className="col-start-3 col-end-6">

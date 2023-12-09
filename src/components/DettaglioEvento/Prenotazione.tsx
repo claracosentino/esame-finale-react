@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { databaseFirebase, writeDataReservation } from "../../utils/firebase";
+import { Button, TextField } from "@mui/material";
 
 const modalStyle = {
     position: "absolute",
@@ -27,21 +28,18 @@ const bodyModalStyle = {
     color: "black",
     marginTop: "2rem",
 };
->>>>>>> ft/gestionePrenotazione
 
 type HeroDettaglioProps = {
     eventDetail: EventDetailType;
 };
 
 const Prenotazione = (props: HeroDettaglioProps) => {
-
-    // INIZIO COSE RIGUARDANTI DATA
     const { date, name } = props.eventDetail;
-    // ora di inzio evento formattata in HH:MM
+
     const hourStartEventFormatted = dayjs(date).format("HH:mm");
-    // array dove vado a inserire (tramite ciclo for) tutti gli slot di 15 min
+
     const hourSlots = [];
-    for (let i = 1; i < 7; i++) {
+    for (let i = 0; i < 7; i++) {
         // prendo la data di inizio evento e ci aggiungo 15*nCiclo minuti
         const hourIncremented = dayjs(date).add(15 * i, "minute");
         // formatto in HH:mm
@@ -52,13 +50,24 @@ const Prenotazione = (props: HeroDettaglioProps) => {
 
     // INIZIO COSE RIGUARDANTI MODALE
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
+    const [selectedHour, setSelectedHour] = useState(date);
+    const handleOpen = (hour: string) => {
+        setOpen(true);
+        setSelectedHour(hour);
+    };
     const handleClose = () => setOpen(false);
+    const resetInput = () => {
+        setInputName("");
+        setInputCognome("");
+        setInputEmail("");
+    };
 
     // INIZIO COSE RIGUARDANTI INPUT
     const [inputName, setInputName] = useState<string>("");
     const [inputCognome, setInputCognome] = useState<string>("");
     const [inputEmail, setInputEmail] = useState<string>("");
+
+    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
     return (
         <>
@@ -68,7 +77,7 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                     {hourSlots.map((hour, i) => {
                         return (
                             <>
-                                <button className="btn btn-solid" onClick={handleOpen}>
+                                <button className="btn btn-solid" onClick={() => handleOpen(hour)}>
                                     {hour}
                                 </button>
                                 <Modal
@@ -96,51 +105,76 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                                     inputCognome,
                                                     inputEmail,
                                                     name,
-                                                    "21:00",
+                                                    selectedHour,
                                                     databaseFirebase
                                                 );
+                                                // chiudo la modale quando faccio il submit
+                                                handleClose();
+                                                // ripulisco i campi della modale (cosi se la riapro è vuota)
+                                                resetInput();
                                             }}
                                         >
                                             <label>
-                                                Nome:
-                                                <input
+                                                <TextField
+                                                    label="nome"
                                                     type="text"
                                                     name="nome"
                                                     value={inputName}
                                                     onChange={(e) => setInputName(e.target.value)}
+                                                    required
+                                                    inputProps={{ minLength: 3 }}
+                                                    helperText={
+                                                        inputName.length < 3 && inputName.length > 0
+                                                            ? "Inserisci un nome valido"
+                                                            : ""
+                                                    }
+                                                    error={
+                                                        inputName.length < 3 && inputName.length > 0
+                                                    }
                                                 />
-                                                Cognome:
-                                                <input
+                                                <TextField
+                                                    label="cognome"
                                                     type="text"
                                                     name="cognome"
                                                     value={inputCognome}
                                                     onChange={(e) =>
                                                         setInputCognome(e.target.value)
                                                     }
+                                                    required
+                                                    inputProps={{ minLength: 3 }}
+                                                    helperText={
+                                                        inputCognome.length < 3 &&
+                                                        inputCognome.length > 0
+                                                            ? "Inserisci un cognome valido"
+                                                            : ""
+                                                    }
+                                                    error={
+                                                        inputCognome.length < 3 &&
+                                                        inputCognome.length > 0
+                                                    }
                                                 />
-                                                Email:
-                                                <input
+                                                <TextField
+                                                    label="email"
                                                     type="text"
                                                     name="email"
                                                     value={inputEmail}
                                                     onChange={(e) => setInputEmail(e.target.value)}
+                                                    required
+                                                    helperText={
+                                                        emailRegex.test(inputEmail) == false &&
+                                                        inputEmail.length > 0
+                                                            ? "Inserisci una mail valida"
+                                                            : ""
+                                                    }
+                                                    error={
+                                                        emailRegex.test(inputEmail) == false &&
+                                                        inputEmail.length > 0
+                                                    }
                                                 />
                                             </label>
-                                            <input
-                                                type="submit"
-                                                value="Submit"
-                                                /* onClick={() =>
-                                                    writeDataReservation(
-                                                        inputName,
-                                                        inputCognome,
-                                                        inputEmail,
-                                                        name,
-                                                        "21:00",
-                                                        databaseFirebase,
-                                                        "1"
-                                                    )
-                                                } */
-                                            />
+                                            <Button variant="contained">
+                                                <input type="submit" value="Submit" />
+                                            </Button>
                                         </form>
                                     </Box>
                                 </Modal>
