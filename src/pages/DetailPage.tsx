@@ -1,12 +1,17 @@
 import DescriptionEvento from "../components/DettaglioEvento/DescriptionEvento";
 import HeroDettaglio from "../components/DettaglioEvento/HeroDettaglio";
 import Prenotazione from "../components/DettaglioEvento/Prenotazione";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import Footer from "../components/Footer/Footer";
+import Loading from "../components/Loading/Loading";
+import Navbar from "../components/Navbar/Navbar";
 import { useEventDetail } from "../hooks/useEventDetail";
 
 const DetailPage = () => {
     const { eventDetail, isLoading } = useEventDetail();
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return (
         <>

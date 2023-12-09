@@ -1,7 +1,7 @@
-import EventListCard from "../components/EventListCard";
-import Footer from "../components/Footer";
-import Faq from "../components/Home/Faq";
-import Navbar from "../components/Navbar";
+import EventListCard from "../components/EventCard/EventListCard";
+import Footer from "../components/Footer/Footer";
+import Loading from "../components/Loading/Loading";
+import Navbar from "../components/Navbar/Navbar";
 import { useEvents } from "../hooks/useEvents";
 
 const AllEvents = () => {
@@ -9,7 +9,7 @@ const AllEvents = () => {
     const { events, isLoading } = useEvents();
 
     if (isLoading) {
-        return <p>Sta caricandoooo</p>;
+        return <Loading />;
     }
 
     return (

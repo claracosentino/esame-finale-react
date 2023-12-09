@@ -3,6 +3,7 @@ import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom"
 import DetailPage from "./pages/DetailPage";
 import { Suspense, lazy } from "react";
 import AllEvents from "./pages/AllEvents";
+import Loading from "./components/Loading/Loading";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
 
 function App() {
     return (
-        <Suspense fallback={<p>Waiting for lazy load</p>}>
+        <Suspense fallback={<Loading />}>
             <RouterProvider router={router} />
         </Suspense>
     );
