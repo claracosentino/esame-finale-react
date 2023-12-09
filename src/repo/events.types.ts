@@ -1,36 +1,28 @@
 // Tipizzazione base, ovvero che sia EventType e EventDetailType hano in comune
 type EventBaseType = {
-    id: number;
-    name: string;
-    coverImage: string;
-    date: string;
-    dresscode: string;
-    price: number;
-    includedDrinks: string[];
-    tags: string[];
-    isAperitivoIncluded: boolean;
-};
-
-// Tipizzazione della descrizione dei piatti contenuti in EventDetailType
-type DishesType = {
-    name: string;
-    description: string;
-    allergens: string[];
-};
+    "id": number,
+    "name": string,
+    "coverImage": string,
+    "date": string,
+    "dresscode": string,
+    "price": number,
+    "includedDrinks": string[],
+    "tags": string[],
+    "isAperitivoIncluded": boolean
+}
 
 // Tipizzazione dell'evento nella home
 // non si può chiamare EventType, sennò crea conflitto con firebase
 export type EventListType = EventBaseType & {
-    description: {
-        short: string;
-    };
-};
+    "description": {
+        "short": string
+    }
+}
 
 // Tipizzazione dell'evento nella pagina dettaglio
 export type EventDetailType = EventBaseType & {
-    description: {
-        long: string[];
-        short: string;
-    };
-    includedDishes: DishesType[];
-};
+    "description": {
+        "long": string[],
+        "short": string
+    }
+}
