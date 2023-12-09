@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 
 const pages = [
     {
@@ -25,7 +26,7 @@ const pages = [
     },
     {
         title: "FAQ",
-        path: "/#faq",
+        path: "/",
     },
 ];
 
@@ -122,17 +123,35 @@ const Navbar = () => {
                         FUSION
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page.title}
-                                component={Link}
-                                to={page.path}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: "white", display: "block" }}
-                            >
-                                {page.title}
-                            </Button>
-                        ))}
+                        {pages.map((page, i) =>
+                            page.title == "FAQ" ? (
+                                <>
+                                    <Button
+                                        key={i}
+                                        sx={{ my: 2, color: "white", display: "block" }}
+                                    >
+                                        <ScrollLink
+                                            to="faq"
+                                            smooth={true}
+                                            offset={0}
+                                            duration={200}
+                                        >
+                                            FAQ
+                                        </ScrollLink>
+                                    </Button>
+                                </>
+                            ) : (
+                                <Button
+                                    key={i}
+                                    component={Link}
+                                    to={page.path}
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: "white", display: "block" }}
+                                >
+                                    {page.title}
+                                </Button>
+                            )
+                        )}
                     </Box>
                 </Toolbar>
             </Container>
