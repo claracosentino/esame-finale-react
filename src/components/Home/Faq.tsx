@@ -41,7 +41,7 @@ const Faq = () => {
                         Dubbi? <span>Faq!</span>
                     </h2>
                     <div className="grid grid-cols-6 gap-4">
-                        <div className="col-start-3 col-end-6">
+                        <div className="col-start-1 md:col-start-3 col-end-7 xl:col-end-6">
                             <div className="box-domanda">
                                 <CustomAccordion>
                                     <CustomAccordionSummary expandIcon={<ExpandMore />}>

@@ -23,7 +23,7 @@ const NextEvents = (props: NextEventsProps) => {
                     </button>
                 </Link>
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid lg:grid-cols-3 gap-4">
                 {events.map((singleEvent, i) => {
                     if (i < 3) {
                         return (

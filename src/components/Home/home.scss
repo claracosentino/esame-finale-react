@@ -18,20 +18,52 @@
         border-image-source: linear-gradient(to right, $viola-scuro, $viola-chiaro);
 
         h1 {
-            font-size: 5vw;
+            font-size: 15vw;
             text-align: center;
+
+            @include md {
+                font-size: 8.7vw;
+            }
+
+            @include lg {
+                font-size: 4vw;
+            }
         }
 
         .payoff {
-            font-size: 1vw;
+            font-size: 3vw;
+
+            @include md {
+                font-size: 2.2vw;
+            }
+
+            @include lg {
+                font-size: 1.1vw;
+            }
+
+            @include xl {
+                font-size: 1.3vw;
+            }
         }
     }
 }
 
 .description-home {
     p {
-        font-size: 3rem;
+        font-size: 1.8rem;
         text-align: center;
+
+        @include md {
+            font-size: 3vw;
+        }
+
+        @include lg {
+            font-size: 2.8rem;
+        }
+
+        @include xl {
+            font-size: 3rem;
+        }
     }
 }
 

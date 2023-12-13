@@ -37,13 +37,19 @@
 
         .name {
             margin-bottom: 0.7rem;
-            font-size: 30px;
+            font-size: 1.8rem;
             font-weight: 900;
             line-height: 1;
         }
 
+        .description {
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
         .tags, .hour {
-            font-size: 15px;
+            font-size: 0.95rem;
             font-weight: 300;
         }
 

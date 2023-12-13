@@ -39,7 +39,7 @@ const EventListCard = ({ singleEvent, detailPath }: EventListCardPropsType) => {
                 </div>
                 <div className="event-card__bottom-info">
                     <div className="name">{name}</div>
-                    <div className="descriprion">{description.short}</div>
+                    <div className="description">{description.short}</div>
                     <div className="flex">
                         <div className="hour">
                             ⏰ dalle {hourFormatted}:
