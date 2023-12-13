@@ -1,4 +1,4 @@
-import { EventDetailType } from "../../repo/events.types";
+import { EventDetailType, DishType } from "../../repo/events.types";
 import "./dettaglio.scss";
 
 type HeroDettaglioProps = {
@@ -6,8 +6,7 @@ type HeroDettaglioProps = {
 };
 
 const DescriptionEvento = (props: HeroDettaglioProps) => {
-    const { tags, description, price, includedDrinks, dresscode, includedDishes } =
-        props.eventDetail;
+    const { description, price, includedDrinks, dresscode, includedDishes } = props.eventDetail;
     const includedDrinksFormatted = includedDrinks.join(", ");
 
     return (
@@ -71,7 +70,7 @@ const DescriptionEvento = (props: HeroDettaglioProps) => {
                             </div>
                             <div className="descrizione-evento__testo-piccolo w-3/6 my-10 ml-10">
                                 {/* La descrizione è un array di frasi: con il map, ogni frase diventa un p e così ogni paragrafo va a capo */}
-                                {includedDishes.map((dish, i) => {
+                                {includedDishes.map((dish: DishType, i: number) => {
                                     return (
                                         <>
                                             <p key={i} className="pb-3">
@@ -81,15 +80,17 @@ const DescriptionEvento = (props: HeroDettaglioProps) => {
                                                 Descrizione: {dish.description}
                                             </p>
 
-                                            {dish.allergens.map((ingrediente, i) => {
-                                                return (
-                                                    <>
-                                                        <p key={i} className="pb-3">
-                                                            Allergeni: {ingrediente}
-                                                        </p>
-                                                    </>
-                                                );
-                                            })}
+                                            {dish.allergens.map(
+                                                (ingrediente: string, i: number) => {
+                                                    return (
+                                                        <>
+                                                            <p key={i} className="pb-3">
+                                                                Allergeni: {ingrediente}
+                                                            </p>
+                                                        </>
+                                                    );
+                                                }
+                                            )}
 
                                             <hr />
                                         </>

@@ -5,7 +5,7 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { databaseFirebase, writeDataReservation } from "../../utils/firebase";
+import { writeDataReservation } from "../../utils/firebase";
 import { Button, TextField } from "@mui/material";
 
 const modalStyle = {
@@ -22,11 +22,6 @@ const modalStyle = {
 
 const titleModalStyle = {
     color: "black",
-};
-
-const bodyModalStyle = {
-    color: "black",
-    marginTop: "2rem",
 };
 
 type HeroDettaglioProps = {
@@ -77,107 +72,117 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                     {hourSlots.map((hour, i) => {
                         return (
                             <>
-                                <button className="btn btn-solid" onClick={() => handleOpen(hour)}>
-                                    {hour}
-                                </button>
-                                <Modal
-                                    open={open}
-                                    onClose={handleClose}
-                                    aria-labelledby="modal-modal-title"
-                                    aria-describedby="modal-modal-description"
-                                >
-                                    <Box sx={modalStyle}>
-                                        <Typography
-                                            sx={titleModalStyle}
-                                            id="modal-modal-title"
-                                            variant="h6"
-                                            component="h2"
-                                        >
-                                            Dacci tutti i tuoi dati per confermare
-                                        </Typography>
-                                        <form
-                                            id="modal-modal-description"
-                                            onSubmit={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                writeDataReservation(
-                                                    inputName,
-                                                    inputCognome,
-                                                    inputEmail,
-                                                    name,
-                                                    selectedHour,
-                                                    databaseFirebase
-                                                );
-                                                // chiudo la modale quando faccio il submit
-                                                handleClose();
-                                                // ripulisco i campi della modale (cosi se la riapro è vuota)
-                                                resetInput();
-                                            }}
-                                        >
-                                            <label>
-                                                <TextField
-                                                    label="nome"
-                                                    type="text"
-                                                    name="nome"
-                                                    value={inputName}
-                                                    onChange={(e) => setInputName(e.target.value)}
-                                                    required
-                                                    inputProps={{ minLength: 3 }}
-                                                    helperText={
-                                                        inputName.length < 3 && inputName.length > 0
-                                                            ? "Inserisci un nome valido"
-                                                            : ""
-                                                    }
-                                                    error={
-                                                        inputName.length < 3 && inputName.length > 0
-                                                    }
-                                                />
-                                                <TextField
-                                                    label="cognome"
-                                                    type="text"
-                                                    name="cognome"
-                                                    value={inputCognome}
-                                                    onChange={(e) =>
-                                                        setInputCognome(e.target.value)
-                                                    }
-                                                    required
-                                                    inputProps={{ minLength: 3 }}
-                                                    helperText={
-                                                        inputCognome.length < 3 &&
-                                                        inputCognome.length > 0
-                                                            ? "Inserisci un cognome valido"
-                                                            : ""
-                                                    }
-                                                    error={
-                                                        inputCognome.length < 3 &&
-                                                        inputCognome.length > 0
-                                                    }
-                                                />
-                                                <TextField
-                                                    label="email"
-                                                    type="text"
-                                                    name="email"
-                                                    value={inputEmail}
-                                                    onChange={(e) => setInputEmail(e.target.value)}
-                                                    required
-                                                    helperText={
-                                                        emailRegex.test(inputEmail) == false &&
-                                                        inputEmail.length > 0
-                                                            ? "Inserisci una mail valida"
-                                                            : ""
-                                                    }
-                                                    error={
-                                                        emailRegex.test(inputEmail) == false &&
-                                                        inputEmail.length > 0
-                                                    }
-                                                />
-                                            </label>
-                                            <Button variant="contained">
-                                                <input type="submit" value="Submit" />
-                                            </Button>
-                                        </form>
-                                    </Box>
-                                </Modal>
+                                <div key={i}>
+                                    <button
+                                        className="btn btn-solid"
+                                        onClick={() => handleOpen(hour)}
+                                    >
+                                        {hour}
+                                    </button>
+                                    <Modal
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="modal-modal-title"
+                                        aria-describedby="modal-modal-description"
+                                    >
+                                        <Box sx={modalStyle}>
+                                            <Typography
+                                                sx={titleModalStyle}
+                                                id="modal-modal-title"
+                                                variant="h6"
+                                                component="h2"
+                                            >
+                                                Dacci tutti i tuoi dati per confermare
+                                            </Typography>
+                                            <form
+                                                id="modal-modal-description"
+                                                onSubmit={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    writeDataReservation(
+                                                        inputName,
+                                                        inputCognome,
+                                                        inputEmail,
+                                                        name,
+                                                        selectedHour
+                                                    );
+                                                    // chiudo la modale quando faccio il submit
+                                                    handleClose();
+                                                    // ripulisco i campi della modale (cosi se la riapro è vuota)
+                                                    resetInput();
+                                                }}
+                                            >
+                                                <label>
+                                                    <TextField
+                                                        label="nome"
+                                                        type="text"
+                                                        name="nome"
+                                                        value={inputName}
+                                                        onChange={(e) =>
+                                                            setInputName(e.target.value)
+                                                        }
+                                                        required
+                                                        inputProps={{ minLength: 3 }}
+                                                        helperText={
+                                                            inputName.length < 3 &&
+                                                            inputName.length > 0
+                                                                ? "Inserisci un nome valido"
+                                                                : ""
+                                                        }
+                                                        error={
+                                                            inputName.length < 3 &&
+                                                            inputName.length > 0
+                                                        }
+                                                    />
+                                                    <TextField
+                                                        label="cognome"
+                                                        type="text"
+                                                        name="cognome"
+                                                        value={inputCognome}
+                                                        onChange={(e) =>
+                                                            setInputCognome(e.target.value)
+                                                        }
+                                                        required
+                                                        inputProps={{ minLength: 3 }}
+                                                        helperText={
+                                                            inputCognome.length < 3 &&
+                                                            inputCognome.length > 0
+                                                                ? "Inserisci un cognome valido"
+                                                                : ""
+                                                        }
+                                                        error={
+                                                            inputCognome.length < 3 &&
+                                                            inputCognome.length > 0
+                                                        }
+                                                    />
+                                                    <TextField
+                                                        label="email"
+                                                        type="text"
+                                                        name="email"
+                                                        value={inputEmail}
+                                                        onChange={(e) =>
+                                                            setInputEmail(e.target.value)
+                                                        }
+                                                        required
+                                                        helperText={
+                                                            emailRegex.test(inputEmail) == false &&
+                                                            inputEmail.length > 0
+                                                                ? "Inserisci una mail valida"
+                                                                : ""
+                                                        }
+                                                        error={
+                                                            emailRegex.test(inputEmail) == false &&
+                                                            inputEmail.length > 0
+                                                        }
+                                                    />
+                                                </label>
+                                                <Button variant="contained">
+                                                    <input type="submit" value="Submit" />
+                                                </Button>
+                                            </form>
+                                        </Box>
+                                    </Modal>
+                                </div>
                             </>
                         );
                     })}

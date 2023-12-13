@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { Database, getDatabase, ref, push } from "firebase/database";
+import { getDatabase, ref, push } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAb7NvFOo4dpju7HBV1iO17eMAEob8xGEQ",
@@ -23,8 +23,7 @@ export function writeDataReservation(
     cognome: string,
     email: string,
     nomeEvento: string,
-    slotOrario: string,
-    database: Database
+    slotOrario: string
 ) {
     push(ref(databaseFirebase, "reservations/"), {
         nome,

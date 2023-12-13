@@ -3,10 +3,11 @@ import "./home.scss";
 const HeroHome = () => {
     // Gestione dell'opacità dell'hero
     const handleScroll = () => {
-        const fluidImg = document.querySelector(".fluid-img");
-        const scrollPosition = window.scrollY;
-        // Quando scrollY è >= 500 allora opacità 0 sennò opacità 1
-        fluidImg.style.opacity = scrollPosition >= 500 ? 0 : 1;
+        const fluidImg = document.querySelector(".fluid-img") as HTMLElement;
+        if (fluidImg) {
+            const scrollPosition = window.scrollY;
+            fluidImg.style.opacity = scrollPosition >= 500 ? "0" : "1";
+        }
     };
 
     window.addEventListener("scroll", handleScroll);

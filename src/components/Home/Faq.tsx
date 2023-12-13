@@ -1,14 +1,13 @@
 import { Accordion, AccordionDetails, AccordionSummary, Typography, styled } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import "./home.scss";
-import Loading from "../Loading/Loading";
 
 // Stili personalizzati per AccordionSummary e AccordionDetails
-const CustomAccordion = styled(Accordion)(({ theme }) => ({
+const CustomAccordion = styled(Accordion)(() => ({
     boxShadow: "none", // Rimuove l'ombra di default dall'Accordion
 }));
 
-const CustomAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
+const CustomAccordionSummary = styled(AccordionSummary)(() => ({
     backgroundColor: "#1d1d1b",
     "& .MuiTypography-root": {
         // qua metto tutte le cose riferite al testo
@@ -22,7 +21,7 @@ const CustomAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
     },
 }));
 
-const CustomAccordionDetails = styled(AccordionDetails)(({ theme }) => ({
+const CustomAccordionDetails = styled(AccordionDetails)(() => ({
     backgroundColor: "#1d1d1b",
     "& .MuiTypography-root": {
         fontFamily: '"Space Grotesk", sans-serif',
