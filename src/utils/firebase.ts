@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, push } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAb7NvFOo4dpju7HBV1iO17eMAEob8xGEQ",
@@ -14,10 +15,13 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log(app.name);
+
+// Initialize Firebase Authentication and get a reference to the service
+export const auth = getAuth(app);
 
 export const databaseFirebase = getDatabase(app);
 
+// funzione per scrivere le informazioni della prenotazione sul db
 export function writeDataReservation(
     nome: string,
     cognome: string,

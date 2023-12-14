@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
+import CheckIfLogin from "../../hooks/checkIfLogin";
 
 const pages = [
     {
@@ -23,9 +24,20 @@ const pages = [
         title: "EVENTS",
         path: "/events",
     },
+    {
+        title: "profilo",
+        path: "/profile",
+    },
+    {
+        title: "accedi",
+        path: "/auth",
+    },
 ];
 
 const Navbar = () => {
+    const user = CheckIfLogin();
+    console.log(user);
+
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -118,17 +130,43 @@ const Navbar = () => {
                         FUSION
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                        {pages.map((page) => (
+                        <Button
+                            component={Link}
+                            to={"/"}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                            HOME
+                        </Button>
+
+                        <Button
+                            component={Link}
+                            to={"/events"}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                            EVENTS
+                        </Button>
+
+                        {user.authUser ? (
                             <Button
-                                key={page.title}
                                 component={Link}
-                                to={page.path}
+                                to={"/events"}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: "white", display: "block" }}
                             >
-                                {page.title}
+                                PROFILO
                             </Button>
-                        ))}
+                        ) : (
+                            <Button
+                                component={Link}
+                                to={"/auth"}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: "white", display: "block" }}
+                            >
+                                LOGIN
+                            </Button>
+                        )}
                     </Box>
                     <div className="block sm:hidden">XS</div>
                     <div className="hidden sm:block md:hidden">SM</div>

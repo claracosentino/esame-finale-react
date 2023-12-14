@@ -4,6 +4,7 @@ import DetailPage from "./pages/DetailPage";
 import { Suspense, lazy } from "react";
 import AllEvents from "./pages/AllEvents";
 import Loading from "./components/Loading/Loading";
+import SignInPage from "./pages/SigInPage";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
     {
         path: "/detail/:id",
         element: <DetailPage />,
+    },
+    {
+        path: "/auth",
+        element: <SignInPage />,
     },
     {
         path: "*",
