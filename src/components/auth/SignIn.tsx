@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { auth } from "../../utils/firebase";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
@@ -14,16 +14,6 @@ const SignIn = () => {
             })
             .catch((e) => {
                 console.log(e);
-            });
-    };
-
-    const handleSignOut = () => {
-        signOut(auth)
-            .then(() => {
-                console.log("sign out succesful");
-            })
-            .catch((e) => {
-                console.log("problemino signout " + e);
             });
     };
 
@@ -45,8 +35,6 @@ const SignIn = () => {
                 />
                 <button type="submit">Login</button>
             </form>
-
-            <button onClick={handleSignOut}>Sign out</button>
         </div>
     );
 };

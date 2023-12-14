@@ -15,28 +15,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import CheckIfLogin from "../../hooks/checkIfLogin";
 
-const pages = [
-    {
-        title: "HOME",
-        path: "/",
-    },
-    {
-        title: "EVENTS",
-        path: "/events",
-    },
-    {
-        title: "profilo",
-        path: "/profile",
-    },
-    {
-        title: "accedi",
-        path: "/auth",
-    },
-];
-
 const Navbar = () => {
     const user = CheckIfLogin();
-    console.log(user);
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
@@ -99,16 +79,31 @@ const Navbar = () => {
                                 display: { xs: "block", md: "none" },
                             }}
                         >
-                            {pages.map((page) => (
+                            <MenuItem component={Link} to={"/"} onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">HOME</Typography>
+                            </MenuItem>
+
+                            <MenuItem component={Link} to={"/events"} onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">EVENTS</Typography>
+                            </MenuItem>
+
+                            {user.authUser ? (
                                 <MenuItem
-                                    key={page.title}
                                     component={Link}
-                                    to={page.path}
+                                    to={"/profile"}
                                     onClick={handleCloseNavMenu}
                                 >
-                                    <Typography textAlign="center">{page.title}</Typography>
+                                    <Typography textAlign="center">PROFILO</Typography>
                                 </MenuItem>
-                            ))}
+                            ) : (
+                                <MenuItem
+                                    component={Link}
+                                    to={"/auth"}
+                                    onClick={handleCloseNavMenu}
+                                >
+                                    <Typography textAlign="center">LOGIN</Typography>
+                                </MenuItem>
+                            )}
                         </Menu>
                     </Box>
                     <Typography
@@ -151,7 +146,7 @@ const Navbar = () => {
                         {user.authUser ? (
                             <Button
                                 component={Link}
-                                to={"/events"}
+                                to={"/profile"}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: "white", display: "block" }}
                             >
