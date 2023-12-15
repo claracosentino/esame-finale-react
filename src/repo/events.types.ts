@@ -33,3 +33,11 @@ export type EventDetailType = EventBaseType & {
     };
     includedDishes: DishType[];
 };
+
+export type ReservationType = {
+    cognome: string;
+    email: string;
+    nome: string;
+    nomeEvento: string;
+    slotOrario: string;
+};
