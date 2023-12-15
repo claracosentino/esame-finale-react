@@ -31,7 +31,7 @@ type HeroDettaglioProps = {
 };
 
 const Prenotazione = (props: HeroDettaglioProps) => {
-    const { date, name } = props.eventDetail;
+    const { date, name, id } = props.eventDetail;
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userMail, setUserMail] = useState("");
     const [ticketQuantity, setTicketQuantity] = useState(0);
@@ -120,7 +120,8 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                                                 userMail,
                                                                 name,
                                                                 selectedHour,
-                                                                ticketQuantity
+                                                                ticketQuantity,
+                                                                id
                                                             );
                                                             // chiudo la modale quando faccio il submit
                                                             handleClose();

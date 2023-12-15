@@ -26,12 +26,14 @@ export function writeDataReservation(
     email: string,
     nomeEvento: string,
     slotOrario: string,
-    ticketQuantity: number
+    ticketQuantity: number,
+    idEvento: number
 ) {
     push(ref(databaseFirebase, "reservations/"), {
         email,
         nomeEvento,
         slotOrario,
         ticketQuantity,
+        idEvento,
     });
 }

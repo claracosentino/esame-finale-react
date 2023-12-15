@@ -77,4 +77,9 @@ button, .btn{
             margin-left: 0.5rem;
         }
     }
+
+    &:disabled {
+        background-color: #AAAAAA;
+        color: #7E7E7E;
+    }
 }

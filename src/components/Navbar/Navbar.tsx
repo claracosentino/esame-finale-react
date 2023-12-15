@@ -13,10 +13,10 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-import CheckIfLogin from "../../hooks/checkIfLogin";
+import IsAuthenticated from "../../hooks/isAuthenticated";
 
 const Navbar = () => {
-    const user = CheckIfLogin();
+    const isAuthenticated = IsAuthenticated();
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
@@ -87,7 +87,7 @@ const Navbar = () => {
                                 <Typography textAlign="center">EVENTS</Typography>
                             </MenuItem>
 
-                            {user.authUser ? (
+                            {isAuthenticated ? (
                                 <MenuItem
                                     component={Link}
                                     to={"/profile"}
@@ -143,7 +143,7 @@ const Navbar = () => {
                             EVENTS
                         </Button>
 
-                        {user.authUser ? (
+                        {isAuthenticated ? (
                             <Button
                                 component={Link}
                                 to={"/profile"}
