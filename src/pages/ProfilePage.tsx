@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import CheckIfLogin from "../hooks/checkIfLogin";
-import { signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { auth, databaseFirebase } from "../utils/firebase";
 import { useEffect, useState } from "react";
 import { child, get, ref } from "firebase/database";
@@ -14,7 +14,46 @@ type ReservationType = {
 };
 
 const ProfilePage = () => {
-    const user = CheckIfLogin();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [userMail, setUserMail] = useState<string | null>(null);
+    const [userReservation, setUserReservation] = useState<ReservationType[]>();
+    const [vediRes, setVediRes] = useState(false);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            const userMail = auth.currentUser?.email;
+            if (userMail) {
+                setUserMail(userMail);
+            }
+        }
+    }, [isAuthenticated]);
+
+    useEffect(() => {
+        const auth = getAuth();
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+            }
+        });
+    }, []);
+
+    const getReservation = () => {
+        const dbref = ref(databaseFirebase);
+        const reservations: ReservationType[] = [];
+
+        get(child(dbref, "reservations")).then((snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+                if (childSnapshot.val().email === userMail) {
+                    reservations.push(childSnapshot.val());
+                }
+            });
+
+            setUserReservation(reservations);
+            setVediRes(true);
+        });
+    };
 
     const handleSignOut = () => {
         signOut(auth)
@@ -26,31 +65,24 @@ const ProfilePage = () => {
             });
     };
 
-    useEffect(() => {
-        const dbref = ref(databaseFirebase);
-
-        get(child(dbref, "reservations")).then((snapshot) => {
-            const userReservation = [];
-            snapshot.forEach((childSnapshot) => {
-                if (childSnapshot.val().email === "simo.motta@gmail.com") {
-                    userReservation.push(childSnapshot.val());
-                }
-            });
-            console.log(userReservation);
-        });
-    }, []);
-
     return (
         <>
-            {user.authUser ? (
+            {isAuthenticated ? (
                 <>
-                    <h1>Bentornato {user.authUser.email}</h1>
+                    <h1>Bentornato {userMail}</h1>
                     <p>Non vediamo l'ora di vederti scatenare a questi eventi! </p>
-                    {/* {userReservation.map((el, i) => {
-                        <p key={i}>
-                            <>{el}</>
-                        </p>;
-                    })} */}
+                    <button onClick={getReservation}>vedi</button>
+                    {vediRes
+                        ? userReservation?.map((el, i) => {
+                              return (
+                                  <>
+                                      <div key={i}>
+                                          <p key={i}>{el.nomeEvento}</p>
+                                      </div>
+                                  </>
+                              );
+                          })
+                        : ""}
                     <button onClick={handleSignOut}>Sign out</button>
                 </>
             ) : (
