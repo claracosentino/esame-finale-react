@@ -9,6 +9,8 @@ const CheckIfLogin = () => {
         const listen = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setAuthUser(user);
+                console.log("check if login");
+                console.log(user.email);
             } else {
                 setAuthUser(null);
             }

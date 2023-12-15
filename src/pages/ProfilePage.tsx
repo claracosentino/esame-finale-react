@@ -5,6 +5,11 @@ import { auth, databaseFirebase } from "../utils/firebase";
 import { useEffect, useState } from "react";
 import { child, get, ref } from "firebase/database";
 
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { counterActions } from "../redux/counter.slice";
+
+import { getAuth } from "firebase/auth";
+
 type ReservationType = {
     cognome: string;
     email: string;
@@ -14,7 +19,17 @@ type ReservationType = {
 };
 
 const ProfilePage = () => {
-    const user = CheckIfLogin();
+    const count = useAppSelector((state) => state.counter.email);
+    const dispatch = useAppDispatch();
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user !== null) {
+        const email = user.email;
+        console.log("oleeee");
+        console.log(email);
+    }
 
     const handleSignOut = () => {
         signOut(auth)
@@ -26,7 +41,7 @@ const ProfilePage = () => {
             });
     };
 
-    useEffect(() => {
+    /* useEffect(() => {
         const dbref = ref(databaseFirebase);
 
         get(child(dbref, "reservations")).then((snapshot) => {
@@ -38,14 +53,18 @@ const ProfilePage = () => {
             });
             console.log(userReservation);
         });
-    }, []);
+    }, []); */
 
     return (
         <>
+            <p>count is {count}</p>
             {user.authUser ? (
                 <>
                     <h1>Bentornato {user.authUser.email}</h1>
                     <p>Non vediamo l'ora di vederti scatenare a questi eventi! </p>
+                    <button onClick={() => dispatch(counterActions.getEmail())}>
+                        Vedi i tuoi appuntamenti coglione
+                    </button>
                     {/* {userReservation.map((el, i) => {
                         <p key={i}>
                             <>{el}</>
