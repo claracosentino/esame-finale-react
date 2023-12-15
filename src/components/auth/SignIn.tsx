@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { auth } from "../../utils/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import "./auth.scss";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
@@ -11,6 +12,8 @@ const SignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
+                console.log("login andato a buon fine");
+                window.location.href = "/";
             })
             .catch((e) => {
                 console.log(e);
@@ -19,21 +22,25 @@ const SignIn = () => {
 
     return (
         <div className="sign-in-container">
-            <form onSubmit={handleSignIn}>
-                <h1>Log in</h1>
+            <form onSubmit={handleSignIn} className="flex flex-wrap justify-center">
+                <h1 className="mb-5">Log in</h1>
                 <input
                     type="email"
-                    placeholder="enter your email"
+                    placeholder="Inserisci l'email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="w-full mb-3 p-3"
                 />
                 <input
                     type="password"
-                    placeholder="enter your password"
+                    placeholder="Inserisci la password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="w-full mb-5 p-3"
                 />
-                <button type="submit">Login</button>
+                <button type="submit" className="btn mb-5">
+                    Login
+                </button>
             </form>
         </div>
     );

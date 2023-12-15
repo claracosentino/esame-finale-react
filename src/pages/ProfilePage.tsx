@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import CheckIfLogin from "../hooks/checkIfLogin";
 import { getAuth, signOut } from "firebase/auth";
 import { auth, databaseFirebase } from "../utils/firebase";
 import { useEffect, useState } from "react";
@@ -17,7 +16,7 @@ const ProfilePage = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userMail, setUserMail] = useState<string | null>(null);
     const [userReservation, setUserReservation] = useState<ReservationType[]>();
-    const [vediRes, setVediRes] = useState(false);
+    const [showReservations, setShowReservations] = useState(false);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -51,7 +50,7 @@ const ProfilePage = () => {
             });
 
             setUserReservation(reservations);
-            setVediRes(true);
+            setShowReservations(true);
         });
     };
 
@@ -72,7 +71,7 @@ const ProfilePage = () => {
                     <h1>Bentornato {userMail}</h1>
                     <p>Non vediamo l'ora di vederti scatenare a questi eventi! </p>
                     <button onClick={getReservation}>vedi</button>
-                    {vediRes
+                    {showReservations
                         ? userReservation?.map((el, i) => {
                               return (
                                   <>

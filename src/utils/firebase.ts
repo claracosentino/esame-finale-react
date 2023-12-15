@@ -23,17 +23,15 @@ export const databaseFirebase = getDatabase(app);
 
 // funzione per scrivere le informazioni della prenotazione sul db
 export function writeDataReservation(
-    nome: string,
-    cognome: string,
     email: string,
     nomeEvento: string,
-    slotOrario: string
+    slotOrario: string,
+    ticketQuantity: number
 ) {
     push(ref(databaseFirebase, "reservations/"), {
-        nome,
-        cognome,
         email,
         nomeEvento,
         slotOrario,
+        ticketQuantity,
     });
 }

@@ -1,12 +1,14 @@
 import { EventDetailType } from "../../repo/events.types";
 import "./dettaglio.scss";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { writeDataReservation } from "../../utils/firebase";
-import { Button, TextField } from "@mui/material";
+import { auth, writeDataReservation } from "../../utils/firebase";
+import { TextField } from "@mui/material";
+import { getAuth } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 const modalStyle = {
     position: "absolute",
@@ -30,6 +32,29 @@ type HeroDettaglioProps = {
 
 const Prenotazione = (props: HeroDettaglioProps) => {
     const { date, name } = props.eventDetail;
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [userMail, setUserMail] = useState("");
+    const [ticketQuantity, setTicketQuantity] = useState(0);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            const userMail = auth.currentUser?.email;
+            if (userMail) {
+                setUserMail(userMail);
+            }
+        }
+    }, [isAuthenticated]);
+
+    useEffect(() => {
+        const auth = getAuth();
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+            }
+        });
+    }, []);
 
     const hourStartEventFormatted = dayjs(date).format("HH:mm");
 
@@ -51,18 +76,6 @@ const Prenotazione = (props: HeroDettaglioProps) => {
         setSelectedHour(hour);
     };
     const handleClose = () => setOpen(false);
-    const resetInput = () => {
-        setInputName("");
-        setInputCognome("");
-        setInputEmail("");
-    };
-
-    // INIZIO COSE RIGUARDANTI INPUT
-    const [inputName, setInputName] = useState<string>("");
-    const [inputCognome, setInputCognome] = useState<string>("");
-    const [inputEmail, setInputEmail] = useState<string>("");
-
-    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
     return (
         <>
@@ -75,7 +88,9 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                 <div key={i}>
                                     <button
                                         className="btn btn-solid"
-                                        onClick={() => handleOpen(hour)}
+                                        onClick={() => {
+                                            handleOpen(hour);
+                                        }}
                                     >
                                         {hour}
                                     </button>
@@ -86,100 +101,67 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                         aria-describedby="modal-modal-description"
                                     >
                                         <Box sx={modalStyle}>
-                                            <Typography
-                                                sx={titleModalStyle}
-                                                id="modal-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                            >
-                                                Dacci tutti i tuoi dati per confermare
-                                            </Typography>
-                                            <form
-                                                id="modal-modal-description"
-                                                onSubmit={(e) => {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                    writeDataReservation(
-                                                        inputName,
-                                                        inputCognome,
-                                                        inputEmail,
-                                                        name,
-                                                        selectedHour
-                                                    );
-                                                    // chiudo la modale quando faccio il submit
-                                                    handleClose();
-                                                    // ripulisco i campi della modale (cosi se la riapro è vuota)
-                                                    resetInput();
-                                                }}
-                                            >
-                                                <label>
-                                                    <TextField
-                                                        label="nome"
-                                                        type="text"
-                                                        name="nome"
-                                                        value={inputName}
-                                                        onChange={(e) =>
-                                                            setInputName(e.target.value)
-                                                        }
-                                                        required
-                                                        inputProps={{ minLength: 3 }}
-                                                        helperText={
-                                                            inputName.length < 3 &&
-                                                            inputName.length > 0
-                                                                ? "Inserisci un nome valido"
-                                                                : ""
-                                                        }
-                                                        error={
-                                                            inputName.length < 3 &&
-                                                            inputName.length > 0
-                                                        }
-                                                    />
-                                                    <TextField
-                                                        label="cognome"
-                                                        type="text"
-                                                        name="cognome"
-                                                        value={inputCognome}
-                                                        onChange={(e) =>
-                                                            setInputCognome(e.target.value)
-                                                        }
-                                                        required
-                                                        inputProps={{ minLength: 3 }}
-                                                        helperText={
-                                                            inputCognome.length < 3 &&
-                                                            inputCognome.length > 0
-                                                                ? "Inserisci un cognome valido"
-                                                                : ""
-                                                        }
-                                                        error={
-                                                            inputCognome.length < 3 &&
-                                                            inputCognome.length > 0
-                                                        }
-                                                    />
-                                                    <TextField
-                                                        label="email"
-                                                        type="text"
-                                                        name="email"
-                                                        value={inputEmail}
-                                                        onChange={(e) =>
-                                                            setInputEmail(e.target.value)
-                                                        }
-                                                        required
-                                                        helperText={
-                                                            emailRegex.test(inputEmail) == false &&
-                                                            inputEmail.length > 0
-                                                                ? "Inserisci una mail valida"
-                                                                : ""
-                                                        }
-                                                        error={
-                                                            emailRegex.test(inputEmail) == false &&
-                                                            inputEmail.length > 0
-                                                        }
-                                                    />
-                                                </label>
-                                                <Button variant="contained">
-                                                    <input type="submit" value="Submit" />
-                                                </Button>
-                                            </form>
+                                            {isAuthenticated ? (
+                                                <>
+                                                    <Typography
+                                                        sx={titleModalStyle}
+                                                        id="modal-modal-title"
+                                                        variant="h6"
+                                                        component="h2"
+                                                    >
+                                                        Dacci tutti i tuoi dati per confermare
+                                                    </Typography>
+                                                    <form
+                                                        id="modal-modal-description"
+                                                        onSubmit={(e) => {
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            writeDataReservation(
+                                                                userMail,
+                                                                name,
+                                                                selectedHour,
+                                                                ticketQuantity
+                                                            );
+                                                            // chiudo la modale quando faccio il submit
+                                                            handleClose();
+                                                        }}
+                                                    >
+                                                        <TextField
+                                                            label="Numero biglietti"
+                                                            type="number"
+                                                            name="ticketQuantity"
+                                                            value={ticketQuantity}
+                                                            onChange={(e) =>
+                                                                setTicketQuantity(
+                                                                    parseInt(e.target.value)
+                                                                )
+                                                            }
+                                                            required
+                                                            InputProps={{
+                                                                inputProps: {
+                                                                    max: 5,
+                                                                    min: 1,
+                                                                },
+                                                            }}
+                                                        />
+                                                        <button type="submit">Conferma</button>
+                                                    </form>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Typography
+                                                        sx={titleModalStyle}
+                                                        id="modal-modal-title"
+                                                        variant="h6"
+                                                        component="h2"
+                                                    >
+                                                        Ops non hai ancora fatto l'accesso!
+                                                        <Link to={"/auth"}>
+                                                            <button>Accedi!</button>
+                                                        </Link>
+                                                    </Typography>
+                                                </>
+                                            )}
                                         </Box>
                                     </Modal>
                                 </div>
