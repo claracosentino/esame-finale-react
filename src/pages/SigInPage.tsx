@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
 
 const SignInPage = () => {
     const isAuthenticated = IsAuthenticated();
@@ -37,6 +39,7 @@ const SignInPage = () => {
 
     return (
         <>
+            <Navbar />
             <section className="auth container w-screen h-screen flex justify-center items-center">
                 <div className="flex flex-col justify-center items-center w-1/2 h-2/3 p-10 rounded-md auth__box">
                     {isAuthenticated ? (
@@ -108,6 +111,7 @@ const SignInPage = () => {
                     )}
                 </div>
             </section>
+            <Footer />
         </>
     );
 };

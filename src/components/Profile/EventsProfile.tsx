@@ -12,7 +12,7 @@ type ReservationType = {
     nomeEvento: string;
     slotOrario: string;
     ticketQuantity: number;
-    idEvent: number;
+    idEvento: number;
 };
 
 type PropsType = {
@@ -48,6 +48,7 @@ const EventsProfile = (props: PropsType) => {
         signOut(auth)
             .then(() => {
                 console.log("sign out succesful");
+                window.location.replace("/auth");
             })
             .catch((e) => {
                 console.log("problemino signout " + e);
@@ -72,23 +73,39 @@ const EventsProfile = (props: PropsType) => {
                                 </button>
                             </div>
 
-                            <p>Non vediamo l'ora di vederti scatenare a questi eventi! </p>
+                            <p className="vederti-scatenare mt-20 mb-10">
+                                Non vediamo l'ora di vederti scatenare 🕺 a questi eventi!
+                            </p>
 
-                            {events.map((singleAvailableEvent, i) => {
-                                userReservation?.map((singleReservationEvent, i) => {
-                                    if (singleAvailableEvent.id == singleAvailableEvent.id) {
-                                        return (
-                                            <>
-                                                <EventListCard
-                                                    singleEvent={singleAvailableEvent}
-                                                    detailPath={`/detail/${singleAvailableEvent.id}`}
-                                                    key={i}
-                                                />
-                                            </>
-                                        );
-                                    }
-                                });
-                            })}
+                            <div className="grid grid-cols-2 gap-4">
+                                {events.map((singleAvailableEvent, i) => {
+                                    return userReservation?.map((singleReservationEvent, i) => {
+                                        if (
+                                            singleAvailableEvent.id ==
+                                            singleReservationEvent.idEvento
+                                        ) {
+                                            return (
+                                                <>
+                                                    <div>
+                                                        <EventListCard
+                                                            singleEvent={singleAvailableEvent}
+                                                            detailPath={`/detail/${singleAvailableEvent.id}`}
+                                                            key={i}
+                                                        />
+
+                                                        <p className="text-center mt-2 mb-5">
+                                                            x{" "}
+                                                            {singleReservationEvent.ticketQuantity}{" "}
+                                                            pax || h.{" "}
+                                                            {singleReservationEvent.slotOrario}
+                                                        </p>
+                                                    </div>
+                                                </>
+                                            );
+                                        }
+                                    });
+                                })}
+                            </div>
                         </>
                     ) : (
                         <>

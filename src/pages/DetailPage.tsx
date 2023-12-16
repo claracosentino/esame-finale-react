@@ -25,7 +25,7 @@ const DetailPage = () => {
                     <Footer />
                 </>
             ) : (
-                <p>Loading...</p>
+                <Loading />
             )}
         </>
     );

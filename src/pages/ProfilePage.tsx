@@ -5,6 +5,7 @@ import IsAuthenticated from "../hooks/isAuthenticated";
 import Navbar from "../components/Navbar/Navbar";
 import HeroProfile from "../components/Profile/HeroProfile";
 import EventsProfile from "../components/Profile/EventsProfile";
+import Footer from "../components/Footer/Footer";
 
 const ProfilePage = () => {
     const [userMail, setUserMail] = useState<string | null>(null);
@@ -30,14 +31,10 @@ const ProfilePage = () => {
                         <EventsProfile userMail={userMail} />
                     </>
                 ) : (
-                    <>
-                        <p>Effettua il login per vedere il tuo profilo</p>
-                        <Link to="/auth">
-                            <button>Vai al login</button>
-                        </Link>
-                    </>
+                    <>{window.location.replace("/auth")}</>
                 )}
             </section>
+            <Footer />
         </>
     );
 };

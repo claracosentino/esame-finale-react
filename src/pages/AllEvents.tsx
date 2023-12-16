@@ -15,9 +15,9 @@ const AllEvents = () => {
     return (
         <>
             <Navbar />
-            <div className="container">
-                <h2>
-                    Tutti gli <span>eventi</span>
+            <div className="container mt-[100px]">
+                <h2 className="text-3xl text-center mb-5">
+                    I nostri <span>eventi</span>
                 </h2>
                 <div className="grid grid-cols-3 gap-4">
                     {events.map((singleEvent, i) => {
