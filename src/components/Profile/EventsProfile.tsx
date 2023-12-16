@@ -79,29 +79,29 @@ const EventsProfile = (props: PropsType) => {
 
                             <div className="grid grid-cols-2 gap-4">
                                 {events.map((singleAvailableEvent, i) => {
-                                    return userReservation?.map((singleReservationEvent, i) => {
+                                    return userReservation?.map((singleReservationEvent) => {
                                         if (
                                             singleAvailableEvent.id ==
                                             singleReservationEvent.idEvento
                                         ) {
                                             return (
                                                 <>
-                                                    <div>
+                                                    <div key={i}>
                                                         <EventListCard
                                                             singleEvent={singleAvailableEvent}
                                                             detailPath={`/detail/${singleAvailableEvent.id}`}
-                                                            key={i}
                                                         />
 
                                                         <p className="text-center mt-2 mb-5">
-                                                            x{" "}
-                                                            {singleReservationEvent.ticketQuantity}{" "}
-                                                            pax || h.{" "}
+                                                            x{singleReservationEvent.ticketQuantity}
+                                                            pax || h.
                                                             {singleReservationEvent.slotOrario}
                                                         </p>
                                                     </div>
                                                 </>
                                             );
+                                        } else {
+                                            return null;
                                         }
                                     });
                                 })}

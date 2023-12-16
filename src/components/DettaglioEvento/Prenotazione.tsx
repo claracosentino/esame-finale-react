@@ -15,15 +15,18 @@ const modalStyle = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "50%",
-    bgcolor: "background.paper",
-    border: "2px solid #000",
+    width: "80%",
+    height: "50%",
+    bgcolor: "#ce4bc5",
+    borderRadius: "20px",
     boxShadow: 24,
     p: 4,
+    textAlign: "center",
 };
 
 const titleModalStyle = {
-    color: "black",
+    color: "white",
+    marginBottom: "50px",
 };
 
 type HeroDettaglioProps = {
@@ -56,10 +59,8 @@ const Prenotazione = (props: HeroDettaglioProps) => {
         });
     }, []);
 
-    const hourStartEventFormatted = dayjs(date).format("HH:mm");
-
     const hourSlots = [];
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
         // prendo la data di inizio evento e ci aggiungo 15*nCiclo minuti
         const hourIncremented = dayjs(date).add(15 * i, "minute");
         // formatto in HH:mm
@@ -81,16 +82,17 @@ const Prenotazione = (props: HeroDettaglioProps) => {
         <>
             <section className="prenotazione">
                 <div className="container">
-                    <p>L'evento inizia alle ore {hourStartEventFormatted}</p>
-                    {hourSlots.map((hour, i) => {
-                        return (
-                            <>
-                                <div key={i}>
+                    <p className="cta">Scegli a che ora arrivare e prenota!</p>
+                    <div className="grid grid-cols-2 sm:grid-cols-6 gap-4 mt-5">
+                        {hourSlots.map((hour, i) => {
+                            return (
+                                <>
                                     <button
                                         className="btn btn-solid"
                                         onClick={() => {
                                             handleOpen(hour);
                                         }}
+                                        key={i}
                                     >
                                         {hour}
                                     </button>
@@ -99,6 +101,13 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                         onClose={handleClose}
                                         aria-labelledby="modal-modal-title"
                                         aria-describedby="modal-modal-description"
+                                        slotProps={{
+                                            backdrop: {
+                                                sx: {
+                                                    backgroundColor: "rgba(0, 0, 0, 0.25)",
+                                                },
+                                            },
+                                        }}
                                     >
                                         <Box sx={modalStyle}>
                                             {isAuthenticated ? (
@@ -107,9 +116,8 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                                         sx={titleModalStyle}
                                                         id="modal-modal-title"
                                                         variant="h6"
-                                                        component="h2"
                                                     >
-                                                        Dacci tutti i tuoi dati per confermare
+                                                        Quanti biglietti vuoi prenotare?
                                                     </Typography>
                                                     <form
                                                         id="modal-modal-description"
@@ -144,8 +152,14 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                                                     min: 1,
                                                                 },
                                                             }}
+                                                            className="w-full"
                                                         />
-                                                        <button type="submit">Conferma</button>
+                                                        <button
+                                                            type="submit"
+                                                            className="btn btn-solid w-full"
+                                                        >
+                                                            Conferma
+                                                        </button>
                                                     </form>
                                                 </>
                                             ) : (
@@ -165,10 +179,10 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                             )}
                                         </Box>
                                     </Modal>
-                                </div>
-                            </>
-                        );
-                    })}
+                                </>
+                            );
+                        })}
+                    </div>
                 </div>
             </section>
         </>

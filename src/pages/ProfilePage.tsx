@@ -21,17 +21,24 @@ const ProfilePage = () => {
         }
     }, [isAuthenticated]);
 
+    console.log(String(isAuthenticated));
     return (
         <>
             <Navbar />
-            <section className="profile mt-[68.5px]">
+            <section className="profile mt-[88.5px]">
                 {isAuthenticated ? (
                     <>
                         <HeroProfile userMail={userMail} />
                         <EventsProfile userMail={userMail} />
                     </>
                 ) : (
-                    <>{window.location.replace("/auth")}</>
+                    <>
+                        <div className="h-[calc(100vh-68.5px)] w-screen flex justify-center items-center">
+                            <Link to={"/auth"}>
+                                <button className="btn btn-solid">Login</button>
+                            </Link>
+                        </div>
+                    </>
                 )}
             </section>
             <Footer />

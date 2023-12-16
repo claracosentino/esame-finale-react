@@ -6,30 +6,125 @@
     background-repeat: no-repeat;
 
     h1 {
-        font-size: 4rem;
+        font-size: 1.5rem;
         text-align: center;
         font-weight: bold;
+
+        @include md {
+            font-size: 2rem;
+        }
+
+        @include md {
+            font-size: 3rem;
+        }
+
+        @include lg {
+            font-size: 4rem;
+        }
     }
 
     &__data {
-        font-size: 1.5rem;
+        font-size: 1rem;
+        text-align: center;
+
+        @include md {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.certificate-aperitivo {
+    background-image: url('../../assets/img/certificate-aperitivo.png');
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+
+    text-align: center;
+    font-size: 3rem;
+
+    width: 23vw;
+    aspect-ratio: 1/1;
+    margin-top: 1rem;
+
+    @include sm {
+        width: 15vw;
     }
 
-    &__tags {
-
+    @include md {
+        width: 11vw;
     }
+
+    .drink, .incluso {
+        padding: 0;
+        margin: 0;
+    }
+
+    .drink {
+        font-weight: 100;
+        font-size: 1rem;
+        margin-bottom: -1.5rem;
+
+        @include sm {
+            margin-bottom: -2rem;
+        }
+
+        @include md {
+            font-size: 1.2rem;
+            margin-bottom: -2.5rem;
+        }
+
+        @include lg {
+            font-size: 1.5rem;
+            margin-bottom: -3rem;
+        }
+    }
+
+    .incluso {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: $viola-chiaro;
+
+        @include sm {
+            font-size: 1.7rem;
+        }
+
+        @include md {
+            font-size: 2rem;
+        }
+
+        @include lg {
+            font-size: 2.4rem;
+        }
+    }
+
 }
 
 .descrizione-evento {
 
     &__testo-grande {
         font-weight: 500;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+
+        @include sm {
+            font-size: 1.3rem;
+        }
+
+        @include md {
+            font-size: 1.5rem;
+        }
     }
 
     &__testo-piccolo {
         font-weight: 200;
-        font-size: 1rem;
+        font-size: 0.9rem;
+
+        @include sm {
+            font-size: 0.9rem;
+        }
+
+        @include md {
+            font-size: 1rem;
+        }
     }
 
     &__box {
@@ -70,60 +165,21 @@
     }
 }
 
-.certificate-aperitivo {
-    background-image: url('../../assets/img/certificate-aperitivo.png');
-    background-position: center; 
-    background-repeat: no-repeat; 
-    background-size: cover;
-
-    width: 11vw;
-    aspect-ratio: 1/1;
-
-    text-align: center;
-    font-size: 3rem;
-
-    .drink, .incluso {
-        padding: 0;
-        margin: 0;
-    }
-
-    .drink {
-        font-weight: 100;
-        font-size: 1.5rem;
-        margin-bottom: -3rem;
-    }
-
-    .incluso {
-        font-weight: 900;
-        color: $viola-chiaro;
-    }
-
-}
-
 .prenotazione {
 
-    button {
-        margin-right: 2rem;
+    .cta {
+        font-weight: 500;
+        font-size: 1.2rem;
+
+        @include sm {
+            font-size: 1.3rem;
+        }
+
+        @include md {
+            font-size: 1.5rem;
+        }
     }
-}
-
-.prenotazione {
-
-    button {
-        margin-right: 2rem;
-    }
-
-}
-
-form {
-    color: black;
-}
-
-.prenotazione {
-
-    button {
-        margin-right: 2rem;
-    }
+    
 
 }
 

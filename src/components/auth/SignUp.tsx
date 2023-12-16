@@ -17,7 +17,7 @@ const SignUp = () => {
     const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     const passwordRegex = /^(?=.*[A-Z])[a-zA-Z0-9]{8,}$/g;
 
-    const handleSignUp = (e) => {
+    const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
