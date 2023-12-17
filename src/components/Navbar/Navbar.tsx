@@ -163,11 +163,11 @@ const Navbar = () => {
                             </Button>
                         )}
                     </Box>
-                    <div className="block sm:hidden">XS</div>
+                    {/* <div className="block sm:hidden">XS</div>
                     <div className="hidden sm:block md:hidden">SM</div>
                     <div className="hidden md:block lg:hidden">MD</div>
                     <div className="hidden md:hidden lg:block xl:hidden">LG</div>
-                    <div className="hidden lg:hidden xl:block">XL</div>
+                    <div className="hidden lg:hidden xl:block">XL</div> */}
                 </Toolbar>
             </Container>
         </AppBar>
