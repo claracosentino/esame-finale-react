@@ -1,5 +1,6 @@
 import { EventDetailType } from "../../repo/events.types";
 import "./dettaglio.scss";
+import "../global.scss";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
@@ -22,6 +23,9 @@ const modalStyle = {
     boxShadow: 24,
     p: 4,
     textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
 };
 
 const titleModalStyle = {
@@ -112,55 +116,57 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                         <Box sx={modalStyle}>
                                             {isAuthenticated ? (
                                                 <>
-                                                    <Typography
-                                                        sx={titleModalStyle}
-                                                        id="modal-modal-title"
-                                                        variant="h6"
-                                                    >
-                                                        Quanti biglietti vuoi prenotare?
-                                                    </Typography>
-                                                    <form
-                                                        id="modal-modal-description"
-                                                        onSubmit={(e) => {
-                                                            e.preventDefault();
-                                                            e.stopPropagation();
-                                                            writeDataReservation(
-                                                                userMail,
-                                                                name,
-                                                                selectedHour,
-                                                                ticketQuantity,
-                                                                id
-                                                            );
-                                                            // chiudo la modale quando faccio il submit
-                                                            handleClose();
-                                                        }}
-                                                    >
-                                                        <TextField
-                                                            label="Numero biglietti"
-                                                            type="number"
-                                                            name="ticketQuantity"
-                                                            value={ticketQuantity}
-                                                            onChange={(e) =>
-                                                                setTicketQuantity(
-                                                                    parseInt(e.target.value)
-                                                                )
-                                                            }
-                                                            required
-                                                            InputProps={{
-                                                                inputProps: {
-                                                                    max: 5,
-                                                                    min: 1,
-                                                                },
-                                                            }}
-                                                            className="w-full"
-                                                        />
-                                                        <button
-                                                            type="submit"
-                                                            className="btn btn-solid w-full"
+                                                    <div className="grid -cols-1">
+                                                        <Typography
+                                                            sx={titleModalStyle}
+                                                            id="modal-modal-title"
+                                                            variant="h5"
                                                         >
-                                                            Conferma
-                                                        </button>
-                                                    </form>
+                                                            Quanti biglietti vuoi prenotare?
+                                                        </Typography>
+                                                        <form
+                                                            id="modal-modal-description"
+                                                            onSubmit={(e) => {
+                                                                e.preventDefault();
+                                                                e.stopPropagation();
+                                                                writeDataReservation(
+                                                                    userMail,
+                                                                    name,
+                                                                    selectedHour,
+                                                                    ticketQuantity,
+                                                                    id
+                                                                );
+                                                                // chiudo la modale quando faccio il submit
+                                                                handleClose();
+                                                            }}
+                                                        >
+                                                            <TextField
+                                                                label="Numero biglietti"
+                                                                type="number"
+                                                                name="ticketQuantity"
+                                                                value={ticketQuantity}
+                                                                onChange={(e) =>
+                                                                    setTicketQuantity(
+                                                                        parseInt(e.target.value)
+                                                                    )
+                                                                }
+                                                                required
+                                                                InputProps={{
+                                                                    inputProps: {
+                                                                        max: 5,
+                                                                        min: 1,
+                                                                    },
+                                                                }}
+                                                                className="w-full"
+                                                            />
+                                                            <button
+                                                                type="submit"
+                                                                className="w-1/2 sm:w-1/3 p-3 mt-5 text-sm sm:text-base text-white bg-slate-950 "
+                                                            >
+                                                                Conferma
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </>
                                             ) : (
                                                 <>
@@ -170,10 +176,16 @@ const Prenotazione = (props: HeroDettaglioProps) => {
                                                         variant="h6"
                                                         component="h2"
                                                     >
-                                                        Ops non hai ancora fatto l'accesso!
-                                                        <Link to={"/auth"}>
-                                                            <button>Accedi!</button>
-                                                        </Link>
+                                                        <div className="grid grid-cols-1">
+                                                            <div className="">
+                                                                Ops non hai ancora fatto l'accesso!
+                                                            </div>
+                                                            <Link to={"/auth"} className="">
+                                                                <button className="w-1/2 sm:w-1/3 p-3 mt-5 text-sm sm:text-base text-white bg-slate-950">
+                                                                    Accedi!
+                                                                </button>
+                                                            </Link>
+                                                        </div>
                                                     </Typography>
                                                 </>
                                             )}

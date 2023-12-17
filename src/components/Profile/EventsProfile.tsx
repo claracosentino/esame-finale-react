@@ -77,7 +77,7 @@ const EventsProfile = (props: PropsType) => {
                                 Non vediamo l'ora di vederti scatenare 🕺 a questi eventi!
                             </p>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {events.map((singleAvailableEvent, i) => {
                                     return userReservation?.map((singleReservationEvent) => {
                                         if (
