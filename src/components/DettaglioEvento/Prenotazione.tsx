@@ -43,6 +43,7 @@ const Prenotazione = (props: HeroDettaglioProps) => {
     const [userMail, setUserMail] = useState("");
     const [ticketQuantity, setTicketQuantity] = useState(0);
 
+    // ottenere mail dell'utente
     useEffect(() => {
         if (isAuthenticated) {
             const userMail = auth.currentUser?.email;

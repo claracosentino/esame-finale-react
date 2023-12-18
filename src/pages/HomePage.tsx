@@ -12,6 +12,7 @@ import Loading from "../components/Loading/Loading";
 register();
 
 const HomePage = () => {
+    // chiamata di useEvents, per ottenere gli eventi. Avrei potuto chiamarla anche solo nel component NextEvents
     const { events, isLoading } = useEvents();
 
     if (isLoading) {
